@@ -1,0 +1,14 @@
+<main>
+  <div class="comment-card__box" *ngFor="let comment of comments_list">
+    <div class="comment-card__header">
+      <img src="{{ comment.user.image.webp }}" alt="" />
+      <h3>{{ comment.user.username }}</h3>
+      <h5>{{ comment.createdAt }}</h5>
+    </div>
+    <p>{{ comment.content }}</p>
+    <div>
+      <button>{{ comment.score }}</button>
+      <button>Reply</button>
+    </div>
+  </div>
+</main>
