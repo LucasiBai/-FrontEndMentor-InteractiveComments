@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { CommentI } from '../interfaces/comment-i';
-import { DataI } from '../interfaces/data-i';
+import { CommentI } from '../models/comment-i';
+import { DataI } from '../models/data-i';
 
 @Injectable({
   providedIn: 'root',

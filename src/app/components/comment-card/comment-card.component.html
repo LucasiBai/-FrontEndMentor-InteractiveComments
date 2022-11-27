@@ -1,1 +1,18 @@
-<p>comment-card works!</p>
+<div class="comment-card__box">
+  <div class="comment-card__header">
+    <img src="{{ comment.user.image.webp }}" alt="" />
+    <h3>{{ comment.user.username }}</h3>
+    <h5>{{ comment.createdAt }}</h5>
+  </div>
+  <p>{{ comment.content }}</p>
+  <div>
+    <button>{{ comment.score }}</button>
+    <button>Reply</button>
+  </div>
+  <div *ngIf="comment.replies !== []" class="comment-card__replies">
+    <app-comment-card
+      *ngFor="let childComment of comment.replies"
+      [comment]="childComment"
+    ></app-comment-card>
+  </div>
+</div>

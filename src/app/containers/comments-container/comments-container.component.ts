@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 import { ApiRequestsService } from 'src/app/services/api-requests.service';
 
-import { CommentI } from 'src/app/interfaces/comment-i';
-import { DataI } from 'src/app/interfaces/data-i';
+import { CommentI } from 'src/app/models/comment-i';
 
 @Component({
   selector: 'app-comments-container',
@@ -11,7 +10,7 @@ import { DataI } from 'src/app/interfaces/data-i';
   styleUrls: ['./comments-container.component.css'],
 })
 export class CommentsContainerComponent {
-  comments_list!: CommentI[];
+  comment_list!: CommentI[];
 
   constructor(private apiRequest: ApiRequestsService) {}
 
@@ -21,7 +20,7 @@ export class CommentsContainerComponent {
 
   private getComments(): void {
     this.apiRequest.getData().subscribe((res: any) => {
-      this.comments_list = res.comments;
+      this.comment_list = res.comments;
     });
   }
 }

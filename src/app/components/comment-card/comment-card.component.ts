@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { CommentI } from 'src/app/interfaces/comment-i';
+import { CommentI } from 'src/app/models/comment-i';
 
 @Component({
   selector: 'app-comment-card',

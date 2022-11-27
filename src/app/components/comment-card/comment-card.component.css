@@ -1,0 +1,24 @@
+.comment-card__box {
+  background-color: white;
+}
+
+.comment-card__box div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comment-card__box .comment-card__header {
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.comment-card__box img {
+  width: 30px;
+  height: 30px;
+}
+
+.comment-card__replies {
+  display: flex;
+  flex-direction: column;
+}
