@@ -1,18 +1,32 @@
 <div class="comment-card__box">
   <div class="comment-card__header">
-    <img src="{{ comment.user.image.webp }}" alt="" />
-    <h3>{{ comment.user.username }}</h3>
+    <img
+      src="{{ comment.user.image.webp }}"
+      alt="{{ comment.user.username }}"
+    />
+    <div>
+      <h3>{{ comment.user.username }}</h3>
+      <h4 *ngIf="isCreator">you</h4>
+    </div>
     <h5>{{ comment.createdAt }}</h5>
   </div>
-  <p>{{ comment.content }}</p>
-  <div>
+  <p>
+    <span *ngIf="replyTo">@{{ replyTo + " " }}</span
+    >{{ comment.content }}
+  </p>
+  <div class="comment-card__iteractive-buttons">
     <button>{{ comment.score }}</button>
     <button>Reply</button>
   </div>
-  <div *ngIf="comment.replies !== []" class="comment-card__replies">
+  <div
+    *ngIf="comment.replies && comment.replies.length > 0"
+    class="comment-card__replies"
+  >
     <app-comment-card
       *ngFor="let childComment of comment.replies"
       [comment]="childComment"
+      [currentUser]="currentUser"
+      [replyTo]="comment.user.username"
     ></app-comment-card>
   </div>
 </div>

@@ -1,16 +1,43 @@
 .comment-card__box {
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  max-width: 345px;
+  width: 100%;
+  border-radius: 8px;
 }
 
-.comment-card__box div {
+.comment-card__box .comment-card__iteractive-buttons {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .comment-card__box .comment-card__header {
+  display: flex;
+  align-items: center;
   justify-content: flex-start;
   gap: 1rem;
+}
+
+.comment-card__box .comment-card__header div {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.comment-card__box .comment-card__header div h3 {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.comment-card__box .comment-card__header div h4 {
+  padding: 0 7px 0;
+  background-color: hsl(238, 40%, 52%);
+  color: white;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  border-radius: 4px;
+  font-weight: 400;
 }
 
 .comment-card__box img {
@@ -18,7 +45,22 @@
   height: 30px;
 }
 
+.comment-card__box p,
+.comment-card__header h5 {
+  font-size: 16px;
+  font-weight: 400;
+  color: hsl(0, 2%, 55%);
+}
+
+.comment-card__box p span {
+  font-weight: 500;
+  color: hsl(238, 40%, 52%);
+}
+
 .comment-card__replies {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+  background-color: hsl(228, 33%, 97%);
+  padding: 1rem 0 1rem 1rem;
 }
