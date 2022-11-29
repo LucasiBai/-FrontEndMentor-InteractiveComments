@@ -1,0 +1,10 @@
+.reply-button {
+  background: none;
+  border: none;
+  color: #5457b6;
+  font-weight: 500;
+}
+
+.reply-button :hover {
+  cursor: pointer;
+}

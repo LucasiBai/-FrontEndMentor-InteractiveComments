@@ -1,0 +1,11 @@
+<section class="comment-card__replies">
+  <hr />
+  <div class="comment-card__replies--cards">
+    <app-comment-card
+      *ngFor="let childComment of replies"
+      [comment]="childComment"
+      [currentUser]="currentUser"
+      [replyTo]="replyTo"
+    ></app-comment-card>
+  </div>
+</section>

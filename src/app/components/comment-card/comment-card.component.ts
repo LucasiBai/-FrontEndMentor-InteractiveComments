@@ -15,8 +15,6 @@ export class CommentCardComponent {
 
   isCreator: boolean = false;
 
-  constructor(private apiRequest: ApiRequestsService) {}
-
   ngOnInit() {
     this.isCreator = this.comment.user.username === this.currentUser;
   }

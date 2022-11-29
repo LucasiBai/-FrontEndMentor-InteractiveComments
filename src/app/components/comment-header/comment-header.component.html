@@ -1,0 +1,8 @@
+<div class="comment-card__header">
+  <img src="{{ userImg }}" alt="{{ userName }}" />
+  <div>
+    <h3>{{ userName }}</h3>
+    <h4 *ngIf="isCreator">you</h4>
+  </div>
+  <h5>{{ createdAt }}</h5>
+</div>
