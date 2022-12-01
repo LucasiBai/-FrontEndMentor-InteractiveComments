@@ -10,5 +10,4 @@ import { CommentI } from 'src/app/models/comment-i';
 export class CommentReplysListComponent {
   @Input() replies!: CommentI[];
   @Input() currentUser!: string;
-  @Input() replyTo!: string;
 }

@@ -13,6 +13,7 @@ import { DeleteButtonComponent } from './components/delete-button/delete-button.
 import { EditButtonComponent } from './components/edit-button/edit-button.component';
 import { CommentHeaderComponent } from './components/comment-header/comment-header.component';
 import { CommentReplysListComponent } from './components/comment-replys-list/comment-replys-list.component';
+import { TextInputCommentComponent } from './components/text-input-comment/text-input-comment.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CommentReplysListComponent } from './components/comment-replys-list/com
     EditButtonComponent,
     CommentHeaderComponent,
     CommentReplysListComponent,
+    TextInputCommentComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

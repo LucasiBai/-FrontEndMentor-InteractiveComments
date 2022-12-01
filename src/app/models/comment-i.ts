@@ -7,4 +7,5 @@ export interface CommentI {
   score: number;
   user: UserI;
   replies: CommentI[];
+  replyingTo: string;
 }

@@ -11,7 +11,6 @@ import { ApiRequestsService } from 'src/app/services/api-requests.service';
 export class CommentCardComponent {
   @Input() comment!: CommentI;
   @Input() currentUser!: string;
-  @Input() replyTo!: string;
 
   isCreator: boolean = false;
 

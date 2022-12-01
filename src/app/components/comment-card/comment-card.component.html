@@ -7,7 +7,7 @@
       [isCreator]="isCreator"
     ></app-comment-header>
     <p>
-      <span *ngIf="replyTo">@{{ replyTo + " " }}</span
+      <span *ngIf="comment.replyingTo">@{{ comment.replyingTo + " " }}</span
       >{{ comment.content }}
     </p>
     <div class="comment-card__iteractive-buttons">
@@ -24,7 +24,6 @@
     *ngIf="comment.replies && comment.replies.length > 0"
     [replies]="comment.replies"
     [currentUser]="currentUser"
-    [replyTo]="comment.user.username"
   >
   </app-comment-replys-list>
 </section>
