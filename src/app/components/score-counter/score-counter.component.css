@@ -10,9 +10,6 @@
   background: none;
   color: hsl(239, 57%, 85%);
   padding: 0.6rem;
-}
-
-.score-counter__box button :hover {
   cursor: pointer;
 }
 

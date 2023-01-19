@@ -1,6 +1,6 @@
-<section class="comment-card__replies">
+<section [ngClass]="['comment-card__replies']">
   <hr />
-  <div class="comment-card__replies--cards">
+  <div [ngClass]="['comment-card__replies--cards']">
     <app-comment-card
       *ngFor="let childComment of replies"
       [comment]="childComment"

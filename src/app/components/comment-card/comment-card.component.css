@@ -35,3 +35,7 @@
   font-weight: 500;
   color: hsl(238, 40%, 52%);
 }
+
+.bold-border {
+  border: 5px solid blue;
+}

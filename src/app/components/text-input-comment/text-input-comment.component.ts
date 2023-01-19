@@ -8,4 +8,9 @@ import { UserI } from 'src/app/models/user-i';
 })
 export class TextInputCommentComponent {
   @Input() currentUser!: UserI;
+
+  comment: any = { message: '' };
+  uploadComment() {
+    console.log(this.comment.message);
+  }
 }

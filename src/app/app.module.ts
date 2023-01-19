@@ -14,6 +14,7 @@ import { EditButtonComponent } from './components/edit-button/edit-button.compon
 import { CommentHeaderComponent } from './components/comment-header/comment-header.component';
 import { CommentReplysListComponent } from './components/comment-replys-list/comment-replys-list.component';
 import { TextInputCommentComponent } from './components/text-input-comment/text-input-comment.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { TextInputCommentComponent } from './components/text-input-comment/text-
     CommentReplysListComponent,
     TextInputCommentComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

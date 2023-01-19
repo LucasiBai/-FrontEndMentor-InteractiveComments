@@ -1,5 +1,5 @@
-<section class="comment-card">
-  <article class="comment-card__box">
+<section [ngClass]="['comment-card']">
+  <article [ngClass]="{ 'comment-card__box': true, 'bold-border': isCreator }">
     <app-comment-header
       [userImg]="comment.user.image.webp"
       [userName]="comment.user.username"
@@ -10,7 +10,7 @@
       <span *ngIf="comment.replyingTo">@{{ comment.replyingTo + " " }}</span
       >{{ comment.content }}
     </p>
-    <div class="comment-card__iteractive-buttons">
+    <div [ngClass]="['comment-card__iteractive-buttons']">
       <app-score-counter [value]="comment.score"></app-score-counter>
       <div *ngIf="isCreator">
         <app-delete-button></app-delete-button>

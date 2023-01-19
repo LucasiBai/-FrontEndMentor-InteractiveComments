@@ -1,4 +1,4 @@
-<span class="score-counter__box">
+<span [ngClass]="['score-counter__box']">
   <button (click)="handleUpdateScore('+')">+</button>
   <span>{{ value }}</span>
   <button (click)="handleUpdateScore('-')">-</button>
