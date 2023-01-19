@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { CommentsContainerComponent } from './containers/comments-container/comments-container.component';
+import { CommentsContainerComponent } from './pages/comments-container/comments-container.component';
 import { CommentCardComponent } from './components/comment-card/comment-card.component';
 import { ScoreCounterComponent } from './components/score-counter/score-counter.component';
 import { ReplyButtonComponent } from './components/reply-button/reply-button.component';
@@ -15,6 +15,7 @@ import { CommentHeaderComponent } from './components/comment-header/comment-head
 import { CommentReplysListComponent } from './components/comment-replys-list/comment-replys-list.component';
 import { TextInputCommentComponent } from './components/text-input-comment/text-input-comment.component';
 import { FormsModule } from '@angular/forms';
+import { AtReferenceComponent } from './components/at-reference/at-reference.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     CommentHeaderComponent,
     CommentReplysListComponent,
     TextInputCommentComponent,
+    AtReferenceComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

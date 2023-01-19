@@ -1,8 +1,11 @@
 <div [ngClass]="['comment-card__header']">
-  <img src="{{ userImg }}" alt="{{ userName }}" />
+  <img
+    src="{{ comment?.user?.image?.webp }}"
+    alt="{{ comment?.user?.username }}"
+  />
   <div>
-    <h3>{{ userName }}</h3>
+    <h3>{{ comment?.user?.username }}</h3>
     <h4 *ngIf="isCreator">you</h4>
   </div>
-  <h5>{{ createdAt }}</h5>
+  <h5>{{ comment?.createdAt }}</h5>
 </div>

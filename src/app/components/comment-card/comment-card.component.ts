@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { CommentI } from 'src/app/models/comment-i';
 import { ApiRequestsService } from 'src/app/services/api-requests.service';
@@ -8,7 +8,7 @@ import { ApiRequestsService } from 'src/app/services/api-requests.service';
   templateUrl: './comment-card.component.html',
   styleUrls: ['./comment-card.component.css'],
 })
-export class CommentCardComponent {
+export class CommentCardComponent implements OnInit {
   @Input() comment!: CommentI;
   @Input() currentUser!: string;
 

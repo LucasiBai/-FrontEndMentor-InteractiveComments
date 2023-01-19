@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CommentI } from 'src/app/models/comment-i';
 
 @Component({
   selector: 'app-comment-header',
@@ -6,8 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./comment-header.component.css'],
 })
 export class CommentHeaderComponent {
-  @Input() userImg!: string;
-  @Input() userName!: string;
-  @Input() createdAt!: string;
+  @Input() comment!: CommentI;
   @Input() isCreator!: boolean;
 }
