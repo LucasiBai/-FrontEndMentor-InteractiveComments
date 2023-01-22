@@ -4,10 +4,12 @@
       [comment]="comment"
       [isCreator]="isCreator"
     ></app-comment-header>
+
     <p>
       <app-at-reference [replyingTo]="comment.replyingTo"></app-at-reference>
       {{ comment.content }}
     </p>
+
     <div [ngClass]="['comment-card__iteractive-buttons']">
       <app-score-counter [value]="comment.score"></app-score-counter>
 
@@ -17,15 +19,18 @@
       </div>
 
       <ng-template #replyBox>
-        <app-reply-button></app-reply-button>
+        <app-reply-button
+          (replyCommentEvent)="replyComment($event)"
+        ></app-reply-button>
       </ng-template>
     </div>
   </article>
 
   <app-comment-replys-list
-    *ngIf="comment.replies && comment.replies.length > 0"
+    *ngIf="(comment.replies && comment.replies.length > 0) || isReplying"
     [replies]="comment.replies"
     [currentUser]="currentUser"
   >
+    <app-text-input-comment *ngIf="isReplying"></app-text-input-comment>
   </app-comment-replys-list>
 </section>

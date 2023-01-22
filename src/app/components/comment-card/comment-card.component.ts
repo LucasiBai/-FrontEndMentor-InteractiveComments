@@ -13,8 +13,13 @@ export class CommentCardComponent implements OnInit {
   @Input() currentUser!: string;
 
   isCreator: boolean = false;
+  isReplying: boolean = false;
 
   ngOnInit() {
     this.isCreator = this.comment.user.username === this.currentUser;
+  }
+
+  replyComment(reply: boolean) {
+    this.isReplying = reply;
   }
 }
