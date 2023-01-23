@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommentI } from 'src/app/models/comment-i';
+import { ReplyCommentService } from 'src/app/services/reply-comment.service';
 
 @Component({
   selector: 'app-reply-button',
@@ -6,13 +8,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./reply-button.component.css'],
 })
 export class ReplyButtonComponent {
-  reply: boolean = false;
+  @Input() comment!: CommentI;
 
-  @Output() replyCommentEvent: EventEmitter<boolean> =
-    new EventEmitter<boolean>(this.reply);
+  constructor(private _reply: ReplyCommentService) {}
 
-  replyComment() {
-    this.reply = !this.reply;
-    this.replyCommentEvent.emit(this.reply);
+  replyComment(): void {
+    this._reply.setReplyingComment(this.comment);
   }
 }

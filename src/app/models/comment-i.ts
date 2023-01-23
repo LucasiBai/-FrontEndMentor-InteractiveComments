@@ -1,9 +1,9 @@
 import { UserI } from './user-i';
 
 export interface CommentI {
-  id: number;
+  id?: number;
   content: string;
-  createdAt: string;
+  createdAt?: string;
   score: number;
   user: UserI;
   replies: CommentI[];
