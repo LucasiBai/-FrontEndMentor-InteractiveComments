@@ -17,12 +17,14 @@ export class CommentCardComponent implements OnInit {
 
   isCreator: boolean = false;
   isReplying: boolean = false;
+  replyingTo!: string | undefined;
 
   ngOnInit() {
     this.isCreator = this.comment.user.username === this.currentUser;
 
     this._reply.replyingComment.subscribe((comment: CommentI | undefined) => {
       this.isReplying = comment?.id === this.comment.id;
+      this.replyingTo = comment?.user.username;
     });
   }
 }

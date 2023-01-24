@@ -29,6 +29,9 @@
     [replies]="comment.replies"
     [currentUser]="currentUser"
   >
-    <app-text-input-comment *ngIf="isReplying"></app-text-input-comment>
+    <app-text-input-comment
+      *ngIf="isReplying"
+      [replyingTo]="replyingTo"
+    ></app-text-input-comment>
   </app-comment-replys-list>
 </section>

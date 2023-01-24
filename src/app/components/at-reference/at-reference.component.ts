@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./at-reference.component.css'],
 })
 export class AtReferenceComponent {
-  @Input() replyingTo!: string;
+  @Input() replyingTo!: string | undefined;
 }

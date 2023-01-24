@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserI } from 'src/app/models/user-i';
+import { CommentI } from 'src/app/models/comment-i';
+import { ApiRequestsService } from 'src/app/services/api-requests.service';
 import { UserProviderService } from 'src/app/services/user-provider.service';
 
 @Component({
@@ -8,9 +10,14 @@ import { UserProviderService } from 'src/app/services/user-provider.service';
   styleUrls: ['./text-input-comment.component.css'],
 })
 export class TextInputCommentComponent implements OnInit {
+  @Input() replyingTo!: string | undefined;
+
   currentUser!: UserI;
 
-  constructor(private _user: UserProviderService) {}
+  constructor(
+    private _user: UserProviderService,
+    private _data: ApiRequestsService
+  ) {}
 
   ngOnInit(): void {
     this._user.currentUserObservable.subscribe(
@@ -20,6 +27,15 @@ export class TextInputCommentComponent implements OnInit {
 
   comment: any = { message: '' };
   uploadComment() {
-    console.log(this.comment.message);
+    const payload: CommentI = {
+      content: this.comment.message,
+      createdAt: '',
+      score: 0,
+      user: this.currentUser,
+      replies: [],
+      replyingTo: this.replyingTo,
+    };
+
+    this._data.addComment(1, payload);
   }
 }
