@@ -3,6 +3,7 @@ import { UserI } from 'src/app/models/user-i';
 import { CommentI } from 'src/app/models/comment-i';
 import { ApiRequestsService } from 'src/app/services/api-requests.service';
 import { UserProviderService } from 'src/app/services/user-provider.service';
+import { ReplyCommentService } from 'src/app/services/reply-comment.service';
 
 @Component({
   selector: 'app-text-input-comment',
@@ -12,20 +13,28 @@ import { UserProviderService } from 'src/app/services/user-provider.service';
 export class TextInputCommentComponent implements OnInit {
   @Input() replyingTo!: string | undefined;
 
+  comment: any = { message: '' };
   currentUser!: UserI;
+  replyingComment!: CommentI;
 
   constructor(
     private _user: UserProviderService,
-    private _data: ApiRequestsService
+    private _data: ApiRequestsService,
+    private _reply: ReplyCommentService
   ) {}
 
   ngOnInit(): void {
     this._user.currentUserObservable.subscribe(
       (res: UserI) => (this.currentUser = res)
     );
+
+    this._reply.replyingComment.subscribe((res) => {
+      if (res !== undefined) {
+        this.replyingComment = res;
+      }
+    });
   }
 
-  comment: any = { message: '' };
   uploadComment() {
     const payload: CommentI = {
       content: this.comment.message,
@@ -36,6 +45,8 @@ export class TextInputCommentComponent implements OnInit {
       replyingTo: this.replyingTo,
     };
 
-    this._data.addComment(1, payload);
+    this._reply.closeReply();
+
+    this._data.addComment(this.replyingComment?.id, payload);
   }
 }

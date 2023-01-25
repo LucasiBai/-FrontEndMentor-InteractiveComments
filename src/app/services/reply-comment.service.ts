@@ -15,11 +15,15 @@ export class ReplyCommentService {
     return this.replyingComment$.asObservable();
   }
 
-  setReplyingComment(comment: CommentI): void {
+  public setReplyingComment(comment: CommentI): void {
     if (comment.id !== this.replyingComment$.value?.id) {
       this.replyingComment$.next(comment);
     } else {
       this.replyingComment$.next(undefined);
     }
+  }
+
+  public closeReply(): void {
+    this.replyingComment$.next(undefined);
   }
 }

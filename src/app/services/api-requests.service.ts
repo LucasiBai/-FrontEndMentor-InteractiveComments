@@ -36,14 +36,16 @@ export class ApiRequestsService {
     return this.data$.asObservable();
   }
 
-  public addComment(replyTo: Number, payload: CommentI): void {
+  public addComment(replyTo: Number = 1, payload: CommentI): void {
     const data: DataI = this.data$.value;
 
     const updatedComment: CommentI = data.comments.filter(
       (comment) => comment.id === replyTo
     )[0];
 
-    updatedComment.replies.push(payload);
+    const comment: CommentI = { id: 5, ...payload };
+
+    updatedComment.replies.push(comment);
 
     const updatedComments: CommentI[] = data.comments.map(
       (comment: CommentI) => {
@@ -58,4 +60,6 @@ export class ApiRequestsService {
 
     this.data$.next(data);
   }
+
+  public removeComment(commentId: Number) {}
 }
