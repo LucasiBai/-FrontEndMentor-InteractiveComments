@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { UserI } from 'src/app/models/user-i';
 import { CommentI } from 'src/app/models/comment-i';
 import { ApiRequestsService } from 'src/app/services/api-requests.service';
@@ -17,6 +17,8 @@ export class TextInputCommentComponent implements OnInit {
   currentUser!: UserI;
   replyingComment!: CommentI;
 
+  @ViewChild('commentInput', { static: true }) commentInput!: ElementRef;
+
   constructor(
     private _user: UserProviderService,
     private _data: ApiRequestsService,
@@ -33,6 +35,8 @@ export class TextInputCommentComponent implements OnInit {
         this.replyingComment = res;
       }
     });
+
+    this.commentInput.nativeElement.focus();
   }
 
   uploadComment() {

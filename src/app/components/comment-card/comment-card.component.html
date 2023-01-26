@@ -14,7 +14,7 @@
       <app-score-counter [value]="comment.score"></app-score-counter>
 
       <div *ngIf="isCreator; else replyBox">
-        <app-delete-button></app-delete-button>
+        <app-delete-button (deleteEvent)="deleteComment()"></app-delete-button>
         <app-edit-button></app-edit-button>
       </div>
 

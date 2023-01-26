@@ -4,6 +4,7 @@ import { DataI } from '../models/data-i';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { CommentI } from '../models/comment-i';
+import { CommentsContainerComponent } from '../pages/comments-container/comments-container.component';
 
 const initData = {
   currentUser: {
@@ -61,5 +62,23 @@ export class ApiRequestsService {
     this.data$.next(data);
   }
 
-  public removeComment(commentId: Number) {}
+  public removeComment(commentId: Number | undefined) {
+    const data = { ...this.data$.value };
+
+    const updatedComments: CommentI[] = [];
+
+    for (const comment of data.comments) {
+      const updatedReplies = comment.replies.filter(
+        (reply: CommentI) => reply.id !== commentId
+      );
+
+      comment.replies = updatedReplies;
+
+      updatedComments.push(comment);
+    }
+
+    data.comments = updatedComments;
+
+    this.data$.next(data);
+  }
 }
