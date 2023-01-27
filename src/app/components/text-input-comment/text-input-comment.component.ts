@@ -42,7 +42,6 @@ export class TextInputCommentComponent implements OnInit {
   uploadComment() {
     const payload: CommentI = {
       content: this.comment.message,
-      createdAt: '',
       score: 0,
       user: this.currentUser,
       replies: [],

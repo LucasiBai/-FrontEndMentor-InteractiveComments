@@ -38,4 +38,8 @@ export class CommentCardComponent implements OnInit {
   deleteComment() {
     this._data.removeComment(this.comment.id);
   }
+
+  editComment() {
+    console.log('edit');
+  }
 }

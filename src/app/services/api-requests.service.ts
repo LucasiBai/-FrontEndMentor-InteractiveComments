@@ -4,7 +4,6 @@ import { DataI } from '../models/data-i';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { CommentI } from '../models/comment-i';
-import { CommentsContainerComponent } from '../pages/comments-container/comments-container.component';
 
 const initData = {
   currentUser: {
@@ -29,6 +28,8 @@ export class ApiRequestsService {
     });
   }
 
+  private lastCreatedIndex: number = 4;
+
   private obtainData() {
     return this.httpClient.get<DataI>('./assets/data.json');
   }
@@ -38,13 +39,19 @@ export class ApiRequestsService {
   }
 
   public addComment(replyTo: Number = 1, payload: CommentI): void {
+    this.lastCreatedIndex++;
+
     const data: DataI = this.data$.value;
 
     const updatedComment: CommentI = data.comments.filter(
       (comment) => comment.id === replyTo
     )[0];
 
-    const comment: CommentI = { id: 5, ...payload };
+    const comment: CommentI = {
+      id: this.lastCreatedIndex,
+      createdAt: 'recently added',
+      ...payload,
+    };
 
     updatedComment.replies.push(comment);
 
@@ -71,6 +78,29 @@ export class ApiRequestsService {
       const updatedReplies = comment.replies.filter(
         (reply: CommentI) => reply.id !== commentId
       );
+
+      comment.replies = updatedReplies;
+
+      updatedComments.push(comment);
+    }
+
+    data.comments = updatedComments;
+
+    this.data$.next(data);
+  }
+
+  public updateComment(commentId: Number | undefined, newContent: string) {
+    const data = { ...this.data$.value };
+
+    const updatedComments: CommentI[] = [];
+
+    for (const comment of data.comments) {
+      const updatedReplies = comment.replies.map((reply: CommentI) => {
+        if (reply.id === commentId) {
+          reply.content = newContent;
+        }
+        return reply;
+      });
 
       comment.replies = updatedReplies;
 

@@ -15,7 +15,7 @@
 
       <div *ngIf="isCreator; else replyBox">
         <app-delete-button (deleteEvent)="deleteComment()"></app-delete-button>
-        <app-edit-button></app-edit-button>
+        <app-edit-button (editEvent)="editComment()"></app-edit-button>
       </div>
 
       <ng-template #replyBox>
