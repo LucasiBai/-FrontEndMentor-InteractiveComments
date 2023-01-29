@@ -1,27 +1,56 @@
-# InteractiveComments
+# Frontend Mentor - Interactive comments section Solution
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+This is a solution to the [Interactive comments section challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/interactive-comments-section-iG1RugEG9/hub).
 
-## Development server
+## Table of contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#solution-screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+- [Author](#author)
 
-## Code scaffolding
+## Overview
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## The challenge
 
-## Build
+Users should be able to:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- View the optimal layout for the app depending on their device's screen size
+- See hover states for all interactive elements on the page
+- Create, Read, Update, and Delete comments and replies
+- Upvote and downvote comments
+- **Bonus**: If you're building a purely front-end project, use `localStorage` to save the current state in the browser that persists when the browser is refreshed.
+- **Bonus**: Instead of using the `createdAt` strings from the `data.json` file, try using timestamps and dynamically track the time since the comment or reply was posted.
 
-## Running unit tests
+<!-- ### Solution Screenshot
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### Desktop View
 
-## Running end-to-end tests
+![screen2](https://user-images.githubusercontent.com/99888705/206203107-fe06bf9a-5141-42ce-af5b-b159e02d49a7.gif)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+#### Mobile View
 
-## Further help
+![screen3](https://user-images.githubusercontent.com/99888705/206205140-42924408-65b7-483d-b4b4-b7f36ad18567.gif)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Links
+
+- Solution URL: https://fem-ecommerce.vercel.app/ -->
+
+## My process
+
+### Built with
+
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- CSS Grid
+- Mobile-first workflow
+- [Angular](https://angular.io/) - JS library
+
+## Author
+
+- Website - [LucasiBai](https://github.com/LucasiBai)
+- Frontend Mentor - [@LucasiBai](https://www.frontendmentor.io/profile/LucasiBai)
