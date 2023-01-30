@@ -1,0 +1,9 @@
+<article>
+  <div class="comment-header"></div>
+  <p>{{ comment.content }}</p>
+  <div class="comment-interactive"></div>
+
+  <div class="comment-replies" *ngIf="comment.replies">
+    <p>replies</p>
+  </div>
+</article>

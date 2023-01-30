@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { UserI } from '../models/user-i';
+import { UserI } from '../../data/models/user-i';
 
 const initUser = {
   image: {
-    png: '',
-    webp: '',
+    png: './images/avatars/image-juliusomo.png',
+    webp: './images/avatars/image-juliusomo.webp',
   },
-  username: '',
+  username: 'juliusomo',
 };
 
 @Injectable({
