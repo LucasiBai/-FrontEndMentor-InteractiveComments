@@ -1,0 +1,9 @@
+<div class="replies-list__box">
+  <hr />
+  <div class="replies-list">
+    <app-comment-card
+      *ngFor="let reply of replies"
+      [comment]="reply"
+    ></app-comment-card>
+  </div>
+</div>

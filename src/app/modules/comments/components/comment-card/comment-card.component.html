@@ -1,9 +1,19 @@
-<article>
-  <div class="comment-header"></div>
+<article class="comment-card__box">
+  <div class="comment-header">
+    <img
+      src="{{ comment.user.image.webp }}"
+      alt="{{ comment.user.username }}"
+    />
+    <h4>{{ comment.user.username }}</h4>
+    <h6>{{ comment.createdAt }}</h6>
+  </div>
+
   <p>{{ comment.content }}</p>
+
   <div class="comment-interactive"></div>
 
-  <div class="comment-replies" *ngIf="comment.replies">
-    <p>replies</p>
-  </div>
+  <app-comment-replies-list
+    *ngIf="comment.replies && comment.replies.length > 0"
+    [replies]="comment.replies"
+  ></app-comment-replies-list>
 </article>
