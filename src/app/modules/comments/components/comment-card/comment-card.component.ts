@@ -8,4 +8,8 @@ import { CommentI } from 'src/app/modules/data/models/comment-i';
 })
 export class CommentCardComponent {
   @Input() comment!: CommentI;
+
+  replyComment() {
+    console.log('Reply');
+  }
 }

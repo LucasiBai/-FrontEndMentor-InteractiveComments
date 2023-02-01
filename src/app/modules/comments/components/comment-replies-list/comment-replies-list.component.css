@@ -1,6 +1,5 @@
 .replies-list__box {
   display: flex;
-  background-color: hsl(228, 33%, 97%);
   padding: 1rem 0;
 }
 

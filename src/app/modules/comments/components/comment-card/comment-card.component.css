@@ -1,5 +1,8 @@
-.comment-card__box {
-  background-color: white;
+.comment-article__box {
   max-width: 350px;
+}
+
+.comment-card__box {
   border-radius: 7px;
+  background-color: white;
 }

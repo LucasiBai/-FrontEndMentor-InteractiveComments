@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { DataI } from '../models/data-i';
-import { CommentI } from '../models/comment-i';
-import { UserI } from '../models/user-i';
 
-const initComment: CommentI[] = [
+import { CommentI } from '../models/comment-i';
+
+const initComments: CommentI[] = [
   {
     id: 1,
     content:
@@ -69,7 +68,20 @@ const initComment: CommentI[] = [
     ],
   },
 ];
-
+const initComment = {
+  id: 0,
+  content: '',
+  createdAt: '',
+  score: 0,
+  user: {
+    image: {
+      png: '',
+      webp: '',
+    },
+    username: '',
+  },
+  replies: [],
+};
 @Injectable({
   providedIn: 'root',
 })
@@ -78,9 +90,41 @@ export class RequestService {
 
   private appComments$: BehaviorSubject<CommentI[]> = new BehaviorSubject<
     CommentI[]
-  >(initComment);
+  >(initComments);
+
+  private currentComment$: BehaviorSubject<CommentI> =
+    new BehaviorSubject<CommentI>(initComment);
 
   get getComments(): Observable<CommentI[]> {
     return this.appComments$.asObservable();
+  }
+
+  private findComment(id: number) {
+    const comments = this.appComments$.value;
+
+    let selectedComment: CommentI = initComment;
+
+    for (const comment of comments) {
+      if (comment.id === id) {
+        selectedComment = comment;
+      } else {
+        const replies: CommentI[] = comment.replies || [];
+
+        for (const reply of replies) {
+          if (reply.id === id) {
+            selectedComment = reply;
+          }
+        }
+      }
+    }
+    return selectedComment;
+  }
+
+  getComment(id: number): Observable<CommentI> {
+    const selectedComment = this.findComment(id);
+
+    this.currentComment$.next(selectedComment);
+
+    return this.currentComment$.asObservable();
   }
 }
