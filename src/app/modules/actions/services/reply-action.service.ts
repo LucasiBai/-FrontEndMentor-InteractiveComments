@@ -32,8 +32,12 @@ export class ReplyActionService {
   }
 
   replyTo(id: number) {
-    this._data
-      .getComment(id)
-      .subscribe((comment) => this.replyingTo$.next(comment));
+    if (id === this.replyingTo$.value.id) {
+      this.replyingTo$.next(initComment);
+    } else {
+      this._data
+        .getComment(id)
+        .subscribe((comment) => this.replyingTo$.next(comment));
+    }
   }
 }

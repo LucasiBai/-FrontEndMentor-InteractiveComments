@@ -17,7 +17,9 @@
   </div>
 
   <app-comment-replies-list
-    *ngIf="comment.replies && comment.replies.length > 0"
+    *ngIf="isReplying || (comment.replies && comment.replies.length > 0)"
     [replies]="comment.replies"
-  ></app-comment-replies-list>
+  >
+    <app-input-comment *ngIf="isReplying"></app-input-comment>
+  </app-comment-replies-list>
 </article>

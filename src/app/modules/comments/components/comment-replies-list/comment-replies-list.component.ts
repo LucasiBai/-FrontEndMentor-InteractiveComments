@@ -7,5 +7,5 @@ import { CommentI } from 'src/app/modules/data/models/comment-i';
   styleUrls: ['./comment-replies-list.component.css'],
 })
 export class CommentRepliesListComponent {
-  @Input() replies!: CommentI[];
+  @Input() replies!: CommentI[] | undefined;
 }

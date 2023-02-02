@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, first, Observable } from 'rxjs';
 
 import { CommentI } from '../models/comment-i';
 
@@ -14,8 +14,8 @@ const initComments: CommentI[] = [
     score: 12,
     user: {
       image: {
-        png: './images/avatars/image-amyrobson.png',
-        webp: './images/avatars/image-amyrobson.webp',
+        png: '../images/avatars/image-amyrobson.png',
+        webp: '../../images/avatars/image-amyrobson.webp',
       },
       username: 'amyrobson',
     },
@@ -96,7 +96,7 @@ export class RequestService {
     new BehaviorSubject<CommentI>(initComment);
 
   get getComments(): Observable<CommentI[]> {
-    return this.appComments$.asObservable();
+    return this.appComments$.asObservable().pipe(first());
   }
 
   private findComment(id: number) {
@@ -125,6 +125,6 @@ export class RequestService {
 
     this.currentComment$.next(selectedComment);
 
-    return this.currentComment$.asObservable();
+    return this.currentComment$.asObservable().pipe(first());
   }
 }
