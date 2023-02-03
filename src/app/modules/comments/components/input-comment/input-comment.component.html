@@ -1,11 +1,8 @@
 <article>
-  <form>
-    <textarea></textarea>
+  <form [formGroup]="commentForm" (submit)="sendComment()">
+    <textarea formControlName="comment"></textarea>
     <div>
-      <img
-        src="{{ currentUser?.image?.webp }}"
-        alt="{{ currentUser?.username }}"
-      />
+      <app-user-icon [user]="currentUser"></app-user-icon>
       <input type="submit" />
     </div>
   </form>

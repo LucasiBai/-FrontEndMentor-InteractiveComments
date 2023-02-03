@@ -4,8 +4,8 @@ import { UserI } from '../../data/models/user-i';
 
 const initUser = {
   image: {
-    png: './images/avatars/image-juliusomo.png',
-    webp: './images/avatars/image-juliusomo.webp',
+    png: './assets/images/avatars/image-juliusomo.png',
+    webp: './assets/images/avatars/image-juliusomo.webp',
   },
   username: 'juliusomo',
 };

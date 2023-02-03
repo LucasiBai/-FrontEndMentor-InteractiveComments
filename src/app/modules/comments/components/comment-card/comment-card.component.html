@@ -1,10 +1,7 @@
 <article class="comment-article__box">
   <div class="comment-card__box">
     <div class="comment-header">
-      <img
-        src="{{ comment.user.image.webp }}"
-        alt="{{ comment.user.username }}"
-      />
+      <app-user-icon [user]="comment.user"></app-user-icon>
       <h4>{{ comment.user.username }}</h4>
       <h6>{{ comment.createdAt }}</h6>
     </div>
@@ -20,6 +17,6 @@
     *ngIf="isReplying || (comment.replies && comment.replies.length > 0)"
     [replies]="comment.replies"
   >
-    <app-input-comment *ngIf="isReplying"></app-input-comment>
   </app-comment-replies-list>
+  <app-input-comment *ngIf="isReplying"></app-input-comment>
 </article>

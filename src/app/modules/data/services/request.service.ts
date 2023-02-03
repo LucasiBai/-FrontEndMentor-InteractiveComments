@@ -14,8 +14,8 @@ const initComments: CommentI[] = [
     score: 12,
     user: {
       image: {
-        png: '../images/avatars/image-amyrobson.png',
-        webp: '../../images/avatars/image-amyrobson.webp',
+        png: './assets/images/avatars/image-amyrobson.png',
+        webp: './assets/images/avatars/image-amyrobson.webp',
       },
       username: 'amyrobson',
     },
@@ -29,8 +29,8 @@ const initComments: CommentI[] = [
     score: 5,
     user: {
       image: {
-        png: './images/avatars/image-maxblagun.png',
-        webp: './images/avatars/image-maxblagun.webp',
+        png: './assets/images/avatars/image-maxblagun.png',
+        webp: './assets/images/avatars/image-maxblagun.webp',
       },
       username: 'maxblagun',
     },
@@ -44,8 +44,8 @@ const initComments: CommentI[] = [
         replyingTo: 'maxblagun',
         user: {
           image: {
-            png: './images/avatars/image-ramsesmiron.png',
-            webp: './images/avatars/image-ramsesmiron.webp',
+            png: './assets/images/avatars/image-ramsesmiron.png',
+            webp: './assets/images/avatars/image-ramsesmiron.webp',
           },
           username: 'ramsesmiron',
         },
@@ -59,8 +59,8 @@ const initComments: CommentI[] = [
         replyingTo: 'ramsesmiron',
         user: {
           image: {
-            png: './images/avatars/image-juliusomo.png',
-            webp: './images/avatars/image-juliusomo.webp',
+            png: './assets/images/avatars/image-juliusomo.png',
+            webp: './assets/images/avatars/image-juliusomo.webp',
           },
           username: 'juliusomo',
         },
@@ -125,6 +125,11 @@ export class RequestService {
 
     this.currentComment$.next(selectedComment);
 
+    return this.currentComment$.asObservable().pipe(first());
+  }
+
+  addComment(comment: CommentI): Observable<CommentI> {
+    // TODO: complete algorithm
     return this.currentComment$.asObservable().pipe(first());
   }
 }
