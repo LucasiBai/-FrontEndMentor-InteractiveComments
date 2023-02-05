@@ -1,6 +1,6 @@
 <article>
   <form [formGroup]="commentForm" (submit)="sendComment()">
-    <textarea formControlName="comment"></textarea>
+    <textarea formControlName="comment" #commentInput></textarea>
     <div>
       <app-user-icon [user]="currentUser"></app-user-icon>
       <input type="submit" />

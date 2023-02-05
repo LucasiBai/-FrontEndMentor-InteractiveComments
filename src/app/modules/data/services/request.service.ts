@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, first, Observable } from 'rxjs';
 
 import { CommentI } from '../models/comment-i';
@@ -86,7 +85,9 @@ const initComment = {
   providedIn: 'root',
 })
 export class RequestService {
-  constructor(private _http: HttpClient) {}
+  constructor() {}
+
+  private lastIndex: number = 5;
 
   private appComments$: BehaviorSubject<CommentI[]> = new BehaviorSubject<
     CommentI[]
@@ -100,7 +101,7 @@ export class RequestService {
   }
 
   private findComment(id: number) {
-    const comments = this.appComments$.value;
+    const comments = [...this.appComments$.value];
 
     let selectedComment: CommentI = initComment;
 
@@ -120,6 +121,27 @@ export class RequestService {
     return selectedComment;
   }
 
+  private findSourceComment(id: number) {
+    const comments = [...this.appComments$.value];
+
+    let selectedComment: CommentI = initComment;
+
+    for (const comment of comments) {
+      if (comment.id === id) {
+        selectedComment = comment;
+      } else {
+        const replies: CommentI[] = comment.replies || [];
+
+        for (const reply of replies) {
+          if (reply.id === id) {
+            selectedComment = comment;
+          }
+        }
+      }
+    }
+    return selectedComment;
+  }
+
   getComment(id: number): Observable<CommentI> {
     const selectedComment = this.findComment(id);
 
@@ -128,8 +150,27 @@ export class RequestService {
     return this.currentComment$.asObservable().pipe(first());
   }
 
-  addComment(comment: CommentI): Observable<CommentI> {
-    // TODO: complete algorithm
+  addComment(replyingTo: number, commentData: any): Observable<CommentI> {
+    const id = this.lastIndex++;
+
+    const replyComment = this.findSourceComment(replyingTo);
+
+    const newCommentPayload = {
+      id,
+      createdAt: 'few secs ago',
+      ...commentData,
+      score: 0,
+    };
+
+    replyComment.replies?.push(newCommentPayload);
+
+    const data = [...this.appComments$.value].map((comment) => {
+      if (comment.id !== replyComment.id) return comment;
+      return replyComment;
+    });
+
+    this.appComments$.next(data);
+
     return this.currentComment$.asObservable().pipe(first());
   }
 }

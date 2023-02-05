@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ReplyActionService } from 'src/app/modules/actions/services/reply-action.service';
 import { UserProviderService } from 'src/app/modules/auth/services/user-provider.service';
@@ -16,6 +16,8 @@ export class InputCommentComponent implements OnInit {
     private _replyAction: ReplyActionService
   ) {}
 
+  @ViewChild('commentInput', { static: true }) commentInput!: ElementRef;
+
   currentUser!: UserI;
 
   commentForm!: FormGroup;
@@ -26,6 +28,8 @@ export class InputCommentComponent implements OnInit {
     );
 
     this.commentForm = this.initForm();
+
+    this.commentInput.nativeElement.focus();
   }
 
   initForm(): FormGroup {
@@ -37,5 +41,7 @@ export class InputCommentComponent implements OnInit {
   sendComment() {
     const { comment } = this.commentForm.value;
     this._replyAction.sendComment(comment, this.currentUser);
+
+    this.commentForm = this.initForm();
   }
 }

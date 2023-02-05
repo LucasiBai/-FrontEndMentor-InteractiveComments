@@ -51,13 +51,25 @@ const initComment = {
   ],
 };
 
+const emptyComment = {
+  id: 0,
+  content: '',
+  createdAt: '',
+  score: 0,
+  user: {
+    image: {
+      png: '',
+      webp: '',
+    },
+    username: '',
+  },
+};
+
 @Injectable({
   providedIn: 'root',
 })
 export class ReplyActionService {
   constructor(private _data: RequestService) {}
-
-  private lastId: number = 4;
 
   private replyingTo$: BehaviorSubject<CommentI> =
     new BehaviorSubject<CommentI>(initComment);
@@ -76,15 +88,19 @@ export class ReplyActionService {
     }
   }
 
-  sendComment(message: string, currentUser: UserI) {
+  sendComment(content: string, user: UserI) {
+    const replyingTo = this.replyingTo$.value;
+
     const formatComment = {
-      id: this.lastId + 1,
-      content: message,
-      createdAt: 'few seconds ago',
-      score: 0,
-      replyingTo: 'maxblagun',
-      user: currentUser,
+      content,
+      replyingTo: replyingTo.user.username,
+      user,
     };
-    this._data.addComment(formatComment).subscribe((res) => (this.lastId += 1));
+
+    this._data
+      .addComment(replyingTo.id || 0, formatComment)
+      .subscribe((res) => {
+        this.replyingTo$.next(emptyComment);
+      });
   }
 }
