@@ -6,10 +6,20 @@
       <h6>{{ comment.createdAt }}</h6>
     </div>
 
-    <p>{{ comment.content }}</p>
+    <p>
+      <span *ngIf="comment.replyingTo">
+        {{ "@" + comment.replyingTo + " " }} </span
+      >{{ comment.content }}
+    </p>
 
     <div class="comment-interactive">
-      <button (click)="replyComment()">Reply</button>
+      <ng-container *ngIf="!ownComment; else ownCommentButtons">
+        <button (click)="replyComment()">Reply</button>
+      </ng-container>
+
+      <ng-template #ownCommentButtons>
+        <button (click)="deleteComment()">Delete</button>
+      </ng-template>
     </div>
   </div>
 

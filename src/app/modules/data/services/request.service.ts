@@ -173,4 +173,19 @@ export class RequestService {
 
     return this.currentComment$.asObservable().pipe(first());
   }
+
+  deleteComment(id: number) {
+    const sourceDeleteComment = this.findSourceComment(id);
+
+    sourceDeleteComment.replies = sourceDeleteComment.replies?.filter(
+      (comment: CommentI) => comment.id !== id
+    );
+
+    const data = [...this.appComments$.value].map((comment) => {
+      if (comment.id !== sourceDeleteComment.id) return comment;
+      return sourceDeleteComment;
+    });
+
+    this.appComments$.next(data);
+  }
 }

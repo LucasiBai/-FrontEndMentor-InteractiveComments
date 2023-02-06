@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ReplyActionService } from 'src/app/modules/actions/services/reply-action.service';
+import { ReplyActionService } from 'src/app/modules/comments/services/reply-action.service';
 import { UserProviderService } from 'src/app/modules/auth/services/user-provider.service';
 import { UserI } from 'src/app/modules/data/models/user-i';
 
