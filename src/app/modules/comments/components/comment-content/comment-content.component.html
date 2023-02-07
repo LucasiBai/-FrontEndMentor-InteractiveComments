@@ -1,0 +1,10 @@
+<p *ngIf="!updating; else updatingComment">
+  <span *ngIf="comment.replyingTo"> {{ "@" + comment.replyingTo + " " }} </span
+  >{{ comment.content }}
+</p>
+<ng-template #updatingComment>
+  <form [formGroup]="commentForm" (ngSubmit)="emitContent()">
+    <textarea formControlName="content"></textarea>
+    <input type="submit" value="UPDATE" />
+  </form>
+</ng-template>

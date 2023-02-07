@@ -188,4 +188,25 @@ export class RequestService {
 
     this.appComments$.next(data);
   }
+
+  updateComment(id: number, newContent: string) {
+    const comment = this.findComment(id);
+    if (comment.content === newContent) return;
+    comment.content = newContent;
+
+    const sourceComment = this.findSourceComment(id);
+    sourceComment.replies = sourceComment.replies?.map(
+      (commentItem: CommentI) => {
+        if (commentItem.id !== comment.id) return commentItem;
+        return comment;
+      }
+    );
+
+    const data = [...this.appComments$.value].map((commentItem: CommentI) => {
+      if (commentItem.id !== sourceComment.id) return commentItem;
+      return sourceComment;
+    });
+
+    this.appComments$.next(data);
+  }
 }

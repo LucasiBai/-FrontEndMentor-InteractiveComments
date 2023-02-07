@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { RequestService } from '../../data/services/request.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UpdateActionService {
-  constructor() {}
+  constructor(private _data: RequestService) {}
 
-  update(id: number, payload: string) {}
+  update(id: number, payload: string) {
+    this._data.updateComment(id, payload);
+  }
 }

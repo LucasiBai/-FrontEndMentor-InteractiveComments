@@ -4,6 +4,7 @@ import { ReplyActionService } from 'src/app/modules/comments/services/reply-acti
 import { UserProviderService } from 'src/app/modules/auth/services/user-provider.service';
 import { CommentI } from 'src/app/modules/data/models/comment-i';
 import { UserI } from 'src/app/modules/data/models/user-i';
+import { UpdateActionService } from '../../services/update-action.service';
 
 @Component({
   selector: 'app-comment-card',
@@ -13,6 +14,7 @@ import { UserI } from 'src/app/modules/data/models/user-i';
 export class CommentCardComponent implements OnInit {
   constructor(
     private _reply: ReplyActionService,
+    private _update: UpdateActionService,
     private _delete: DeleteActionService,
     private _user: UserProviderService
   ) {}
@@ -20,6 +22,8 @@ export class CommentCardComponent implements OnInit {
 
   ownComment!: boolean;
   isReplying: boolean = false;
+
+  updating: boolean = false;
 
   ngOnInit(): void {
     this._user.currentUser.subscribe(
@@ -38,5 +42,14 @@ export class CommentCardComponent implements OnInit {
 
   deleteComment() {
     this._delete.delete(this.comment.id || 0);
+  }
+
+  switchUpdating() {
+    this.updating = !this.updating;
+  }
+
+  updateComment(content: string) {
+    this._update.update(this.comment.id || 0, content);
+    this.updating = false;
   }
 }

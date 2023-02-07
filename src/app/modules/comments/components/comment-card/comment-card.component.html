@@ -4,13 +4,14 @@
       <app-user-icon [user]="comment.user"></app-user-icon>
       <h4>{{ comment.user.username }}</h4>
       <h6>{{ comment.createdAt }}</h6>
+      <h6 *ngIf="ownComment">You</h6>
     </div>
 
-    <p>
-      <span *ngIf="comment.replyingTo">
-        {{ "@" + comment.replyingTo + " " }} </span
-      >{{ comment.content }}
-    </p>
+    <app-comment-content
+      [comment]="{ content: comment.content, replyingTo: comment.replyingTo }"
+      [updating]="updating"
+      (updateContentEvent)="updateComment($event)"
+    ></app-comment-content>
 
     <div class="comment-interactive">
       <ng-container *ngIf="!ownComment; else ownCommentButtons">
@@ -19,6 +20,7 @@
 
       <ng-template #ownCommentButtons>
         <button (click)="deleteComment()">Delete</button>
+        <button (click)="switchUpdating()">Edit</button>
       </ng-template>
     </div>
   </div>
