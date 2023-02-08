@@ -5,4 +5,11 @@
 .comment-card__box {
   border-radius: 7px;
   background-color: white;
+  padding: 1rem;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }

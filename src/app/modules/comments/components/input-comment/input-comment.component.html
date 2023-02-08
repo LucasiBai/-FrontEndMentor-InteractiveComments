@@ -1,8 +1,13 @@
 <article>
   <form [formGroup]="commentForm" (submit)="sendComment()">
-    <textarea formControlName="comment" #commentInput></textarea>
+    <textarea
+      placeholder="add a comment..."
+      formControlName="comment"
+      #commentInput
+    ></textarea>
     <div>
       <app-user-icon [user]="currentUser"></app-user-icon>
+      <label></label>
       <input type="submit" />
     </div>
   </form>

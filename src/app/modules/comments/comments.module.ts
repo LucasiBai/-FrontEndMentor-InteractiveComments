@@ -8,6 +8,10 @@ import { CommentRepliesListComponent } from './components/comment-replies-list/c
 import { InputCommentComponent } from './components/input-comment/input-comment.component';
 import { UserIconComponent } from './components/user-icon/user-icon.component';
 import { CommentContentComponent } from './components/comment-content/comment-content.component';
+import { ScoreCounterComponent } from './components/score-counter/score-counter.component';
+import { ReplyButtonComponent } from './components/buttons/reply-button/reply-button.component';
+import { DeleteButtonComponent } from './components/buttons/delete-button/delete-button.component';
+import { EditButtonComponent } from './components/buttons/edit-button/edit-button.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +21,10 @@ import { CommentContentComponent } from './components/comment-content/comment-co
     InputCommentComponent,
     UserIconComponent,
     CommentContentComponent,
+    ScoreCounterComponent,
+    ReplyButtonComponent,
+    DeleteButtonComponent,
+    EditButtonComponent,
   ],
   imports: [CommonModule, CommentsRoutingModule, ReactiveFormsModule],
   exports: [CommentListComponent],

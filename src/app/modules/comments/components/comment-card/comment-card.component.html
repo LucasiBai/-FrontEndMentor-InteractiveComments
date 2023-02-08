@@ -3,7 +3,7 @@
     <div class="comment-header">
       <app-user-icon [user]="comment.user"></app-user-icon>
       <h4>{{ comment.user.username }}</h4>
-      <h6>{{ comment.createdAt }}</h6>
+      <h5>{{ comment.createdAt }}</h5>
       <h6 *ngIf="ownComment">You</h6>
     </div>
 
@@ -14,13 +14,17 @@
     ></app-comment-content>
 
     <div class="comment-interactive">
+      <app-score-counter [initCount]="comment.score"></app-score-counter>
+
       <ng-container *ngIf="!ownComment; else ownCommentButtons">
-        <button (click)="replyComment()">Reply</button>
+        <app-reply-button (click)="replyComment()"></app-reply-button>
       </ng-container>
 
       <ng-template #ownCommentButtons>
-        <button (click)="deleteComment()">Delete</button>
-        <button (click)="switchUpdating()">Edit</button>
+        <div class="own-comment-buttons">
+          <app-delete-button (click)="deleteComment()"></app-delete-button>
+          <app-edit-button (click)="switchUpdating()"></app-edit-button>
+        </div>
       </ng-template>
     </div>
   </div>
