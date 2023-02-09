@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommentI } from 'src/app/modules/data/models/comment-i';
 import { RequestService } from 'src/app/modules/data/services/request.service';
+import { ConfirmService } from 'src/app/modules/modals/services/confirm-service.service';
 
 @Component({
   selector: 'app-home-page',
