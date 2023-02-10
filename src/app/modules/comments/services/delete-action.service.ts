@@ -11,8 +11,18 @@ export class DeleteActionService {
     private _confirm: ConfirmService
   ) {}
 
+  askForDelete(id: number) {
+    const headerModal: string = 'Delete comment';
+
+    const contentModal: string =
+      "Are you sure you want to delete this comment? This will remove the comment and can't be undone.";
+
+    this._confirm.confirm(headerModal, contentModal, () => {
+      this.delete(id);
+    });
+  }
+
   delete(id: number) {
-    this._confirm.confirm('hi', 'delete comment');
-    // this._data.deleteComment(id);
+    this._data.deleteComment(id);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ConfirmI } from '../../models/confirm-i';
 import { ConfirmService } from '../../services/confirm-service.service';
 
 @Component({
@@ -10,16 +11,20 @@ import { ConfirmService } from '../../services/confirm-service.service';
 export class CustomConfirmComponent implements OnInit {
   constructor(private _confirm: ConfirmService) {}
 
-  @Input() header!: string;
-  @Input() content!: string;
-
-  isConfirming!: Observable<boolean>;
+  confirmData!: ConfirmI;
 
   ngOnInit() {
-    this.isConfirming = this._confirm.isConfirming;
+    this._confirm.isConfirming.subscribe(
+      (confirming: ConfirmI) => (this.confirmData = confirming)
+    );
   }
 
   closeModal() {
     this._confirm.closeModal();
+  }
+
+  executeAction() {
+    this.confirmData.action();
+    this.closeModal();
   }
 }

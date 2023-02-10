@@ -1,11 +1,13 @@
-<section class="confirm-background" *ngIf="isConfirming | async">
-  <article>
-    <h5>{{ header }}</h5>
-    <p *ngIf="content">{{ content }}</p>
-    <div class="interactive-buttons">
-      <button>NO, CANCEL</button>
-      <button>YES, DELETE</button>
-    </div>
-  </article>
+<section class="confirm-background" *ngIf="confirmData.isConfirming">
+  <div class="modal__box">
+    <article>
+      <h5>{{ confirmData.header }}</h5>
+      <p *ngIf="confirmData.content">{{ confirmData.content }}</p>
+      <div class="interactive-buttons">
+        <button (click)="closeModal()">NO, CANCEL</button>
+        <button (click)="executeAction()">YES, DELETE</button>
+      </div>
+    </article>
+  </div>
   <section (click)="closeModal()"></section>
 </section>

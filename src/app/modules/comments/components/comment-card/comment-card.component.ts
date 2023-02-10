@@ -41,7 +41,7 @@ export class CommentCardComponent implements OnInit {
   }
 
   deleteComment() {
-    this._delete.delete(this.comment.id || 0);
+    this._delete.askForDelete(this.comment.id || 0);
   }
 
   switchUpdating() {
