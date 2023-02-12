@@ -5,7 +5,7 @@
       <p *ngIf="confirmData.content">{{ confirmData.content }}</p>
       <div class="interactive-buttons">
         <button (click)="closeModal()">NO, CANCEL</button>
-        <button (click)="executeAction()">YES, DELETE</button>
+        <button class="confirm" (click)="executeAction()">YES, DELETE</button>
       </div>
     </article>
   </div>

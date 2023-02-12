@@ -1,5 +1,6 @@
 <p *ngIf="!updating; else updatingComment">
-  <span *ngIf="comment.replyingTo"> {{ "@" + comment.replyingTo + " " }} </span
+  <span *ngIf="comment.replyingTo" class="replying-to">
+    {{ "@" + comment.replyingTo + " " }} </span
   >{{ comment.content }}
 </p>
 <ng-template #updatingComment>
