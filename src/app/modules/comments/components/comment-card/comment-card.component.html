@@ -3,8 +3,8 @@
     <div class="comment-header">
       <app-user-icon [user]="comment.user"></app-user-icon>
       <h4>{{ comment.user.username }}</h4>
+      <h6 *ngIf="ownComment">you</h6>
       <h5>{{ comment.createdAt }}</h5>
-      <h6 *ngIf="ownComment">You</h6>
     </div>
 
     <app-comment-content

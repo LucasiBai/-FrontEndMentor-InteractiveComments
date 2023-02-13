@@ -6,3 +6,28 @@ article {
   background-color: white;
   border-radius: 5px;
 }
+
+form textarea {
+  resize: none;
+  width: 100%;
+  max-width: 279px;
+  height: auto;
+  min-height: 62px;
+  margin: 1rem;
+  padding: 0.7rem 1.2rem;
+  border-color: #e7e7e7;
+  border-radius: 5px;
+  font-size: 17px;
+}
+
+form textarea:focus {
+  outline-color: #5357b6;
+  outline-offset: 2px;
+}
+
+form div {
+  display: flex;
+  margin: 0 1rem;
+  justify-content: space-between;
+  align-items: center;
+}

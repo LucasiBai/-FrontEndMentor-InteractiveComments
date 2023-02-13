@@ -28,9 +28,19 @@
   font-size: 15px;
 }
 
+.comment-header h6 {
+  background-color: #5357b6;
+  color: white;
+  border-radius: 2px;
+  padding: 3px 6px;
+  font-weight: 500;
+  font-size: 13px;
+}
+
 .comment-interactive {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .comment-interactive div {

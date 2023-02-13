@@ -1,14 +1,14 @@
 <article>
   <form [formGroup]="commentForm" (submit)="sendComment()">
     <textarea
-      placeholder="add a comment..."
+      placeholder="Add a comment..."
       formControlName="comment"
       #commentInput
     ></textarea>
     <div>
       <app-user-icon [user]="currentUser"></app-user-icon>
       <label></label>
-      <input type="submit" />
+      <input type="submit" value="SEND" />
     </div>
   </form>
 </article>
