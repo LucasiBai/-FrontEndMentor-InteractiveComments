@@ -69,11 +69,3 @@
   cursor: pointer;
   background-color: #575e68;
 }
-
-.modal__box .confirm {
-  background-color: hsl(358, 79%, 66%);
-}
-
-.modal__box .confirm:hover {
-  background-color: hsl(358, 55%, 57%);
-}

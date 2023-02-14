@@ -4,8 +4,12 @@
       <h5>{{ confirmData.header }}</h5>
       <p *ngIf="confirmData.content">{{ confirmData.content }}</p>
       <div class="interactive-buttons">
-        <button (click)="closeModal()">NO, CANCEL</button>
-        <button class="confirm" (click)="executeAction()">YES, DELETE</button>
+        <app-text-button (click)="closeModal()">NO, CANCEL</app-text-button>
+        <app-text-button
+          [color]="'hsl(358, 79%, 66%)'"
+          (click)="executeAction()"
+          >YES, DELETE</app-text-button
+        >
       </div>
     </article>
   </div>

@@ -80,7 +80,7 @@ export class ReplyActionService {
 
   replyTo(id: number) {
     if (id === this.replyingTo$.value.id) {
-      this.replyingTo$.next(initComment);
+      this.replyingTo$.next(emptyComment);
     } else {
       this._data
         .getComment(id)
