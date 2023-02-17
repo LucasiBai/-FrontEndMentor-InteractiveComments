@@ -1,3 +1,7 @@
-<button [style.backgroundColor]="color ? color : '#68727e'">
+<button
+  [style.backgroundColor]="color ? color : '#68727e'"
+  (mouseenter)="setHoverLightness()"
+  (mouseleave)="setLeaveLightness()"
+>
   <ng-content></ng-content>
 </button>

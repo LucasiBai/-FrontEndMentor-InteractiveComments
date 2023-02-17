@@ -6,7 +6,9 @@
       <div class="interactive-buttons">
         <app-text-button (click)="closeModal()">NO, CANCEL</app-text-button>
         <app-text-button
-          [color]="'hsl(358, 79%, 66%)'"
+          [hue]="'358'"
+          [lightness]="'66'"
+          [saturation]="'79'"
           (click)="executeAction()"
           >YES, DELETE</app-text-button
         >
