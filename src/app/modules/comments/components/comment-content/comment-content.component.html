@@ -6,6 +6,13 @@
 <ng-template #updatingComment>
   <form [formGroup]="commentForm" (ngSubmit)="emitContent()">
     <textarea formControlName="content"></textarea>
-    <input type="submit" value="UPDATE" />
+    <app-text-button
+      type="submit"
+      [hue]="'238'"
+      [saturation]="'40'"
+      [lightness]="'52'"
+    >
+      UPDATE
+    </app-text-button>
   </form>
 </ng-template>

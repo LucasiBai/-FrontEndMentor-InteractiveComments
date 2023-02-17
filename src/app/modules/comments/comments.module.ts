@@ -13,6 +13,7 @@ import { ScoreCounterComponent } from './components/score-counter/score-counter.
 import { ReplyButtonComponent } from './components/buttons/reply-button/reply-button.component';
 import { DeleteButtonComponent } from './components/buttons/delete-button/delete-button.component';
 import { EditButtonComponent } from './components/buttons/edit-button/edit-button.component';
+import { ButtonsModule } from '../buttons/buttons.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,12 @@ import { EditButtonComponent } from './components/buttons/edit-button/edit-butto
     DeleteButtonComponent,
     EditButtonComponent,
   ],
-  imports: [CommonModule, CommentsRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    CommentsRoutingModule,
+    ReactiveFormsModule,
+    ButtonsModule,
+  ],
   exports: [CommentListComponent],
 })
 export class CommentsModule {}

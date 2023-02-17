@@ -34,14 +34,18 @@ export class InputCommentComponent implements OnInit {
 
   initForm(): FormGroup {
     return this._fb.group({
-      comment: ['', [Validators.minLength(5), Validators.nullValidator]],
+      comment: ['', [Validators.minLength(3)]],
     });
   }
 
   sendComment() {
     const { comment } = this.commentForm.value;
-    this._replyAction.sendComment(comment, this.currentUser);
+    const valid = comment.length > 0 && this.commentForm.get('comment')?.valid;
 
-    this.commentForm = this.initForm();
+    if (valid) {
+      this._replyAction.sendComment(comment, this.currentUser);
+
+      this.commentForm = this.initForm();
+    }
   }
 }

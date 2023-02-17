@@ -8,7 +8,14 @@
     <div>
       <app-user-icon [user]="currentUser"></app-user-icon>
       <label></label>
-      <input type="submit" value="SEND" />
+      <app-text-button
+        type="submit"
+        [hue]="'238'"
+        [saturation]="'40'"
+        [lightness]="'52'"
+      >
+        SEND
+      </app-text-button>
     </div>
   </form>
 </article>
