@@ -33,6 +33,7 @@ export class CommentCardComponent implements OnInit {
 
     this._reply.replyingTo.subscribe((commentR: CommentI) => {
       this.isReplying = commentR.id === this.comment.id;
+      this.updating = false;
     });
   }
 
@@ -45,6 +46,7 @@ export class CommentCardComponent implements OnInit {
   }
 
   switchUpdating() {
+    this._reply.replyTo(0);
     this.updating = !this.updating;
   }
 
