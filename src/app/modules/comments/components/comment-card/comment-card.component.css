@@ -11,7 +11,7 @@
   gap: 1rem;
 }
 
-.comment-header {
+.comment-header div {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -46,4 +46,23 @@
 .comment-interactive div {
   display: flex;
   gap: 1rem;
+}
+
+.comment-header .desktop-counter {
+  display: none;
+}
+
+@media only screen and (min-width: 576px) {
+  .comment-article__box {
+    max-width: 785px;
+  }
+  .comment-interactive {
+    display: none;
+  }
+  .comment-header .desktop-counter {
+    display: block;
+  }
+  .comment-header {
+    display: flex;
+  }
 }

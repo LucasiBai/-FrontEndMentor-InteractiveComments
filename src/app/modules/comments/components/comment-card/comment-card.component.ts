@@ -37,6 +37,10 @@ export class CommentCardComponent implements OnInit {
     });
   }
 
+  setScore(score: number) {
+    this.comment.score = score;
+  }
+
   replyComment() {
     this._reply.replyTo(this.comment.id || 0);
   }

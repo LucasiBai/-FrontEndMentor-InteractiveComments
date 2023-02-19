@@ -1,10 +1,18 @@
 <article class="comment-article__box">
   <div class="comment-card__box">
     <div class="comment-header">
-      <app-user-icon [user]="comment.user"></app-user-icon>
-      <h4>{{ comment.user.username }}</h4>
-      <h6 *ngIf="ownComment">you</h6>
-      <h5>{{ comment.createdAt }}</h5>
+      <div>
+        <app-score-counter
+          [initCount]="comment.score"
+          (countEvent)="setScore($event)"
+        ></app-score-counter>
+      </div>
+      <div>
+        <app-user-icon [user]="comment.user"></app-user-icon>
+        <h4>{{ comment.user.username }}</h4>
+        <h6 *ngIf="ownComment">you</h6>
+        <h5>{{ comment.createdAt }}</h5>
+      </div>
     </div>
 
     <app-comment-content
@@ -14,7 +22,10 @@
     ></app-comment-content>
 
     <div class="comment-interactive">
-      <app-score-counter [initCount]="comment.score"></app-score-counter>
+      <app-score-counter
+        [initCount]="comment.score"
+        (countEvent)="setScore($event)"
+      ></app-score-counter>
 
       <ng-container *ngIf="!ownComment; else ownCommentButtons">
         <app-reply-button (click)="replyComment()"></app-reply-button>
