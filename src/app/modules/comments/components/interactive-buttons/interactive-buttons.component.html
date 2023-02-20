@@ -1,0 +1,19 @@
+<div class="comment-interactive">
+  <ng-container *ngIf="platform === 'mobile'">
+    <app-score-counter
+      [initCount]="initCount"
+      (countEvent)="emitScore($event)"
+    ></app-score-counter>
+  </ng-container>
+
+  <ng-container *ngIf="!ownComment; else ownCommentButtons">
+    <app-reply-button (click)="emitReply()"></app-reply-button>
+  </ng-container>
+
+  <ng-template #ownCommentButtons>
+    <div class="own-comment-buttons">
+      <app-delete-button (click)="emitDelete()"></app-delete-button>
+      <app-edit-button (click)="emitEdit()"></app-edit-button>
+    </div>
+  </ng-template>
+</div>

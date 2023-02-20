@@ -7,8 +7,13 @@
   background-color: white;
   padding: 1rem;
   display: flex;
+}
+
+.comment-body-content {
+  display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 100%;
 }
 
 .comment-header div {
@@ -37,32 +42,30 @@
   font-size: 13px;
 }
 
-.comment-interactive {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.comment-interactive div {
-  display: flex;
-  gap: 1rem;
-}
-
-.comment-header .desktop-counter {
+.comment-article__box .desktop {
   display: none;
 }
 
 @media only screen and (min-width: 576px) {
+  .comment-article__box .desktop {
+    display: block;
+  }
+
+  .comment-article__box .mobile {
+    display: none;
+  }
+
   .comment-article__box {
     max-width: 785px;
   }
-  .comment-interactive {
-    display: none;
+  .comment-card__box {
+    gap: 1.5rem;
+    padding: 1.5rem;
   }
-  .comment-header .desktop-counter {
-    display: block;
-  }
+
   .comment-header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }

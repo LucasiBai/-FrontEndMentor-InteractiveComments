@@ -14,6 +14,7 @@ import { ReplyButtonComponent } from './components/buttons/reply-button/reply-bu
 import { DeleteButtonComponent } from './components/buttons/delete-button/delete-button.component';
 import { EditButtonComponent } from './components/buttons/edit-button/edit-button.component';
 import { ButtonsModule } from '../buttons/buttons.module';
+import { InteractiveButtonsComponent } from './components/interactive-buttons/interactive-buttons.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ButtonsModule } from '../buttons/buttons.module';
     ReplyButtonComponent,
     DeleteButtonComponent,
     EditButtonComponent,
+    InteractiveButtonsComponent,
   ],
   imports: [
     CommonModule,

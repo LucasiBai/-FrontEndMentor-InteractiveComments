@@ -1,42 +1,50 @@
 <article class="comment-article__box">
   <div class="comment-card__box">
-    <div class="comment-header">
-      <div>
-        <app-score-counter
-          [initCount]="comment.score"
-          (countEvent)="setScore($event)"
-        ></app-score-counter>
-      </div>
-      <div>
-        <app-user-icon [user]="comment.user"></app-user-icon>
-        <h4>{{ comment.user.username }}</h4>
-        <h6 *ngIf="ownComment">you</h6>
-        <h5>{{ comment.createdAt }}</h5>
-      </div>
-    </div>
-
-    <app-comment-content
-      [comment]="{ content: comment.content, replyingTo: comment.replyingTo }"
-      [updating]="updating"
-      (updateContentEvent)="updateComment($event)"
-    ></app-comment-content>
-
-    <div class="comment-interactive">
+    <div class="desktop">
       <app-score-counter
         [initCount]="comment.score"
         (countEvent)="setScore($event)"
       ></app-score-counter>
+    </div>
 
-      <ng-container *ngIf="!ownComment; else ownCommentButtons">
-        <app-reply-button (click)="replyComment()"></app-reply-button>
-      </ng-container>
-
-      <ng-template #ownCommentButtons>
-        <div class="own-comment-buttons">
-          <app-delete-button (click)="deleteComment()"></app-delete-button>
-          <app-edit-button (click)="switchUpdating()"></app-edit-button>
+    <div class="comment-body-content">
+      <div class="comment-header">
+        <div>
+          <app-user-icon [user]="comment.user"></app-user-icon>
+          <h4>{{ comment.user.username }}</h4>
+          <h6 *ngIf="ownComment">you</h6>
+          <h5>{{ comment.createdAt }}</h5>
         </div>
-      </ng-template>
+
+        <div class="desktop">
+          <app-interactive-buttons
+            [platform]="'desktop'"
+            [ownComment]="ownComment"
+            [initCount]="comment.score"
+            (replyEvent)="replyComment()"
+            (deleteEvent)="deleteComment()"
+            (editEvent)="switchUpdating()"
+          ></app-interactive-buttons>
+        </div>
+      </div>
+
+      <app-comment-content
+        [comment]="{ content: comment.content, replyingTo: comment.replyingTo }"
+        [updating]="updating"
+        (updateContentEvent)="updateComment($event)"
+      ></app-comment-content>
+
+      <div class="mobile">
+        <app-interactive-buttons
+          [platform]="'mobile'"
+          [ownComment]="ownComment"
+          [initCount]="comment.score"
+          (replyEvent)="replyComment()"
+          (deleteEvent)="deleteComment()"
+          (editEvent)="switchUpdating()"
+          (countEvent)="setScore($event)"
+        ></app-interactive-buttons>
+      </div>
     </div>
   </div>
 

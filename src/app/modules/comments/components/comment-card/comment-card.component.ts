@@ -50,7 +50,7 @@ export class CommentCardComponent implements OnInit {
   }
 
   switchUpdating() {
-    this._reply.replyTo(0);
+    // this._reply.replyTo(0);
     this.updating = !this.updating;
   }
 

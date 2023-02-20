@@ -1,0 +1,10 @@
+.comment-interactive {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-interactive div {
+  display: flex;
+  gap: 1rem;
+}
