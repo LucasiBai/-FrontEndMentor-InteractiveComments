@@ -16,6 +16,10 @@
   font-size: 16px;
 }
 
+.score-counter__box button:hover {
+  color: hsl(238, 40%, 52%);
+}
+
 .score-counter__box span {
   color: hsl(238, 40%, 52%);
   font-weight: 500;

@@ -1,11 +1,28 @@
 <article>
   <form [formGroup]="commentForm" (submit)="sendComment()">
+    <span class="desktop">
+      <app-user-icon [user]="currentUser"></app-user-icon>
+    </span>
+
+    <label></label>
     <textarea
       placeholder="Add a comment..."
       formControlName="comment"
       #commentInput
     ></textarea>
-    <div>
+
+    <span class="desktop">
+      <app-text-button
+        type="submit"
+        [hue]="'238'"
+        [saturation]="'40'"
+        [lightness]="'52'"
+      >
+        SEND
+      </app-text-button>
+    </span>
+
+    <div class="mobile">
       <app-user-icon [user]="currentUser"></app-user-icon>
       <label></label>
       <app-text-button

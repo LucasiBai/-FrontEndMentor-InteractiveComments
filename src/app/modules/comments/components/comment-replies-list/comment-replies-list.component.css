@@ -16,3 +16,10 @@
   gap: 1rem;
   width: 100%;
 }
+
+@media only screen and (min-width: 576px) {
+  .replies-list__box hr {
+    margin: 0 3rem;
+    width: 3px;
+  }
+}

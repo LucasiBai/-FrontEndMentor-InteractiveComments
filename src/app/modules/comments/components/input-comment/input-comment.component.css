@@ -37,3 +37,44 @@ form div {
   width: 88%;
   margin-bottom: 1rem;
 }
+
+article .desktop {
+  display: none;
+}
+
+@media only screen and (min-width: 576px) {
+  article .mobile {
+    display: none;
+  }
+
+  article .desktop {
+    display: block;
+  }
+
+  form {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+  form textarea {
+    margin: 0;
+    max-width: 100%;
+    min-height: 70px;
+  }
+
+  form textarea::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  form textarea::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  form textarea::-webkit-scrollbar-thumb {
+    background-color: #c2bfbf;
+    border-radius: 20px;
+    border: 4px solid #ffffff;
+  }
+}
