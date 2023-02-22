@@ -68,4 +68,8 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .comment-header div {
+    gap: 1rem;
+  }
 }
