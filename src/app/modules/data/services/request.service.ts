@@ -92,7 +92,7 @@ const initComment = {
 })
 export class RequestService {
   constructor() {
-    this.updateLocalStorage();
+    this.saveData();
   }
 
   private lastIndex: number = 5;
@@ -108,7 +108,7 @@ export class RequestService {
     return this.appComments$.asObservable().pipe(first());
   }
 
-  updateLocalStorage() {
+  saveData() {
     const parsedData: string = JSON.stringify(this.appComments$.value);
 
     localStorage.setItem('comments', parsedData);
@@ -185,7 +185,7 @@ export class RequestService {
 
     this.appComments$.next(data);
 
-    this.updateLocalStorage();
+    this.saveData();
 
     return this.currentComment$.asObservable().pipe(first());
   }
@@ -204,11 +204,15 @@ export class RequestService {
 
     this.appComments$.next(data);
 
-    this.updateLocalStorage();
+    this.saveData();
   }
 
-  updateComment(id: number, newContent: string) {
+  updateComment(id: number, newContent: string, score?: number) {
     const comment = this.findComment(id);
+    if (score) {
+      comment.score = score;
+      this.saveData();
+    }
     if (comment.content === newContent) return;
     comment.content = newContent;
 
@@ -227,6 +231,6 @@ export class RequestService {
 
     this.appComments$.next(data);
 
-    this.updateLocalStorage();
+    this.saveData();
   }
 }

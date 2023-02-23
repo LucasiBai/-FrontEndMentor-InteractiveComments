@@ -39,6 +39,11 @@ export class CommentCardComponent implements OnInit {
 
   setScore(score: number) {
     this.comment.score = score;
+    this._update.update(
+      this.comment.id || 0,
+      this.comment.content,
+      this.comment.score
+    );
   }
 
   replyComment() {
@@ -50,7 +55,6 @@ export class CommentCardComponent implements OnInit {
   }
 
   switchUpdating() {
-    // this._reply.replyTo(0);
     this.updating = !this.updating;
   }
 
