@@ -48,4 +48,40 @@ describe('Test Comment Card', () => {
   it('Should render comment card', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Should update score, setScore()', () => {
+    const initScore = mockCommentCard['score'];
+
+    component.setScore(5);
+
+    const currentScore = component.comment['score'];
+
+    expect(initScore !== currentScore).toBeTrue();
+
+    expect(currentScore).toEqual(5);
+  });
+
+  it('Should switch updating, switchUpdating()', () => {
+    const initState = component.updating;
+
+    expect(initState).toBeFalse();
+
+    component.switchUpdating();
+
+    expect(component.updating).toBeTrue();
+
+    component.switchUpdating();
+
+    expect(component.updating).toBeFalse();
+  });
+
+  it("Should update 'updating' to false, updateComment()", () => {
+    component.switchUpdating();
+
+    expect(component.updating).toBeTrue();
+
+    component.updateComment('');
+
+    expect(component.updating).toBeFalse();
+  });
 });
