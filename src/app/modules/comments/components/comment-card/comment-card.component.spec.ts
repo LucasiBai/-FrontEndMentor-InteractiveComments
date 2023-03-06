@@ -1,11 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommentI } from 'src/app/modules/data/models/comment-i';
+import { ReplyActionService } from '../../services/reply-action.service';
 import { ReplyButtonComponent } from '../buttons/reply-button/reply-button.component';
 import { CommentContentComponent } from '../comment-content/comment-content.component';
 import { InteractiveButtonsComponent } from '../interactive-buttons/interactive-buttons.component';
 import { ScoreCounterComponent } from '../score-counter/score-counter.component';
 import { UserIconComponent } from '../user-icon/user-icon.component';
 import { CommentCardComponent } from './comment-card.component';
+
+import { DataModule } from 'src/app/modules/data/data.module';
+import { ModalsModule } from 'src/app/modules/modals/modals.module';
+
+import { ConfirmService } from 'src/app/modules/modals/services/confirm-service.service';
+import { RequestService } from 'src/app/modules/data/services/request.service';
+import { ConfirmI } from 'src/app/modules/modals/models/confirm-i';
 
 const mockCommentCard: CommentI = {
   id: 1,
@@ -37,6 +45,7 @@ describe('Test Comment Card', () => {
         CommentContentComponent,
         ReplyButtonComponent,
       ],
+      imports: [DataModule, ModalsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CommentCardComponent);
@@ -49,39 +58,84 @@ describe('Test Comment Card', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Should update score, setScore()', () => {
-    const initScore = mockCommentCard['score'];
+  describe('Test setScore()', () => {
+    it('Should update score', () => {
+      const initScore = mockCommentCard['score'];
 
-    component.setScore(5);
+      component.setScore(5);
 
-    const currentScore = component.comment['score'];
+      const currentScore = component.comment['score'];
 
-    expect(initScore !== currentScore).toBeTrue();
+      expect(initScore !== currentScore).toBeTrue();
 
-    expect(currentScore).toEqual(5);
+      expect(currentScore).toEqual(5);
+    });
   });
 
-  it('Should switch updating, switchUpdating()', () => {
-    const initState = component.updating;
+  describe('Test switchUpdating()', () => {
+    it('Should switch updating', () => {
+      const initState = component.updating;
 
-    expect(initState).toBeFalse();
+      expect(initState).toBeFalse();
 
-    component.switchUpdating();
+      component.switchUpdating();
 
-    expect(component.updating).toBeTrue();
+      expect(component.updating).toBeTrue();
 
-    component.switchUpdating();
+      component.switchUpdating();
 
-    expect(component.updating).toBeFalse();
+      expect(component.updating).toBeFalse();
+    });
   });
 
-  it("Should update 'updating' to false, updateComment()", () => {
-    component.switchUpdating();
+  describe('Test updateComment()', () => {
+    it("Should update 'updating' to false", () => {
+      component.switchUpdating();
 
-    expect(component.updating).toBeTrue();
+      expect(component.updating).toBeTrue();
 
-    component.updateComment('');
+      component.updateComment('');
 
-    expect(component.updating).toBeFalse();
+      expect(component.updating).toBeFalse();
+    });
+    // TODO: Test if comment was updated
+  });
+
+  describe('Tests replyComment()', () => {
+    let service: ReplyActionService;
+
+    beforeEach(() => {
+      service = TestBed.inject(ReplyActionService);
+    });
+
+    it('Should update replyingTo ', () => {
+      component.replyComment();
+
+      service.replyingTo.subscribe((replyingTo: CommentI) => {
+        expect(replyingTo.id).toEqual(mockCommentCard.id);
+      });
+    });
+  });
+
+  describe('Tests deleteComment()', () => {
+    let dataService: RequestService;
+    let modalService: ConfirmService;
+
+    beforeEach(() => {
+      dataService = TestBed.inject(RequestService);
+      modalService = TestBed.inject(ConfirmService);
+    });
+
+    it('Should ask for delete comment', () => {
+      const commentId = component.comment.id || 0;
+
+      expect(dataService.getComment(commentId)).toBeTruthy();
+
+      component.deleteComment();
+
+      modalService.isConfirming.subscribe((confirm: ConfirmI) => {
+        expect(confirm.isConfirming).toBeTrue();
+      });
+    });
   });
 });
