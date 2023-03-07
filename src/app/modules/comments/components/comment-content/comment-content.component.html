@@ -4,7 +4,11 @@
   >{{ comment.content }}
 </p>
 <ng-template #updatingComment>
-  <form [formGroup]="commentForm" (ngSubmit)="emitContent()">
+  <form
+    class="update-form"
+    [formGroup]="commentForm"
+    (ngSubmit)="emitContent()"
+  >
     <textarea formControlName="content"></textarea>
     <div>
       <app-text-button
