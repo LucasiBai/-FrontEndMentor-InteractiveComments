@@ -89,6 +89,25 @@ describe('Test Comment Card', () => {
   });
 
   describe('Test updateComment()', () => {
+    let dataService: RequestService;
+
+    beforeEach(() => {
+      dataService = TestBed.inject(RequestService);
+    });
+
+    it('Should update comment', () => {
+      const commentId = component.comment.id || 0;
+      component.switchUpdating();
+
+      component.updateComment('Test update content');
+
+      dataService
+        .getComment(commentId)
+        .subscribe((comment: CommentI) =>
+          expect(comment.content).toEqual('Test update content')
+        );
+    });
+
     it("Should update 'updating' to false", () => {
       component.switchUpdating();
 
@@ -98,7 +117,6 @@ describe('Test Comment Card', () => {
 
       expect(component.updating).toBeFalse();
     });
-    // TODO: Test if comment was updated
   });
 
   describe('Tests replyComment()', () => {
