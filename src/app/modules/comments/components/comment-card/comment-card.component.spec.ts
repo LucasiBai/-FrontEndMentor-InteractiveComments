@@ -14,6 +14,9 @@ import { ModalsModule } from 'src/app/modules/modals/modals.module';
 import { ConfirmService } from 'src/app/modules/modals/services/confirm-service.service';
 import { RequestService } from 'src/app/modules/data/services/request.service';
 import { ConfirmI } from 'src/app/modules/modals/models/confirm-i';
+import { DeleteButtonComponent } from '../buttons/delete-button/delete-button.component';
+import { EditButtonComponent } from '../buttons/edit-button/edit-button.component';
+import { CommentRepliesListComponent } from '../comment-replies-list/comment-replies-list.component';
 
 const mockCommentCard: CommentI = {
   id: 1,
@@ -31,6 +34,39 @@ const mockCommentCard: CommentI = {
   replies: [],
 };
 
+const mockCommentReplies: CommentI[] = [
+  {
+    id: 3,
+    content:
+      "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
+    createdAt: '1 week ago',
+    score: 4,
+    replyingTo: 'maxblagun',
+    user: {
+      image: {
+        png: './images/avatars/image-ramsesmiron.png',
+        webp: './images/avatars/image-ramsesmiron.webp',
+      },
+      username: 'ramsesmiron',
+    },
+  },
+  {
+    id: 4,
+    content:
+      "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
+    createdAt: '2 days ago',
+    score: 2,
+    replyingTo: 'ramsesmiron',
+    user: {
+      image: {
+        png: './images/avatars/image-juliusomo.png',
+        webp: './images/avatars/image-juliusomo.webp',
+      },
+      username: 'juliusomo',
+    },
+  },
+];
+
 describe('Test Comment Card', () => {
   let fixture: ComponentFixture<CommentCardComponent>;
   let component: CommentCardComponent;
@@ -44,6 +80,10 @@ describe('Test Comment Card', () => {
         InteractiveButtonsComponent,
         CommentContentComponent,
         ReplyButtonComponent,
+        DeleteButtonComponent,
+        EditButtonComponent,
+        CommentRepliesListComponent,
+        ReplyButtonComponent,
       ],
       imports: [DataModule, ModalsModule],
     }).compileComponents();
@@ -56,6 +96,35 @@ describe('Test Comment Card', () => {
 
   it('Should render comment card', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('Test own comment', () => {
+    beforeEach(() => {
+      component.ownComment = true;
+      fixture.detectChanges();
+    });
+
+    it("Should render 'you' label next to the name", () => {
+      const h6 = fixture.debugElement.nativeElement.querySelector('h6');
+
+      expect(h6).toBeTruthy();
+    });
+  });
+
+  describe('Test comment replies', () => {
+    beforeEach(() => {
+      component.comment.replies = mockCommentReplies;
+      fixture.detectChanges();
+    });
+
+    it('Should render comment replies', () => {
+      const replies = fixture.debugElement.nativeElement
+        .querySelector('app-comment-replies-list')
+        .querySelectorAll('app-comment-card');
+
+      expect(replies.length).toEqual(2);
+      expect(replies).toBeTruthy();
+    });
   });
 
   describe('Test setScore()', () => {
