@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 import { first } from 'rxjs';
 import { ButtonsModule } from 'src/app/modules/buttons/buttons.module';
 import { CommentI } from 'src/app/modules/data/models/comment-i';
