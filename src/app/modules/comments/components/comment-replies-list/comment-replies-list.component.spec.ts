@@ -91,5 +91,12 @@ describe('Test Comment Replies list', () => {
     it('Should render correctly', () => {
       expect(component).toBeTruthy();
     });
+
+    it('Should render cards in DOM', () => {
+      const cards =
+        fixture.debugElement.nativeElement.querySelectorAll('app-comment-card');
+
+      expect(cards.length).toEqual(mockCommentReplies.length);
+    });
   });
 });
