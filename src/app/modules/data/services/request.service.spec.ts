@@ -41,10 +41,158 @@ fdescribe('Test Request Service', () => {
       });
     });
 
+    it('Should return entered reply comment', () => {
+      service.getComment(4).subscribe((comment: CommentI) => {
+        expect(comment).toBeTruthy();
+        expect(comment.id).toEqual(4);
+      });
+    });
+
     it('Should return no existent comment', () => {
       service.getComment(20).subscribe((comment: CommentI) => {
         expect(comment.id).toBeFalsy();
       });
     });
+  });
+
+  describe('Test addComment()', () => {
+    it('Should reply to comment and create comment in cache', () => {
+      const commentPayload: { replyingTo: number; commentData: any } = {
+        replyingTo: 1,
+        commentData: {
+          replyingTo: 'TestUser',
+          user: {
+            image: {
+              png: './assets/images/avatars/image-ramsesmiron.png',
+              webp: './assets/images/avatars/image-ramsesmiron.webp',
+            },
+            username: 'ramsesmiron',
+          },
+          content: 'Test comment content',
+        },
+      };
+
+      service
+        .addComment(commentPayload.replyingTo, commentPayload.commentData)
+        .subscribe((comment: CommentI) => {
+          expect(comment.id);
+        });
+
+      service.getComment(5).subscribe((comment: CommentI) => {
+        expect(comment.id).toEqual(5);
+        expect(comment.content).toEqual(commentPayload.commentData.content);
+      });
+    });
+
+    it('Should reply to reply and create comment in source comment', () => {
+      const commentPayload: { replyingTo: number; commentData: any } = {
+        replyingTo: 4,
+        commentData: {
+          replyingTo: 'TestUser',
+          user: {
+            image: {
+              png: './assets/images/avatars/image-ramsesmiron.png',
+              webp: './assets/images/avatars/image-ramsesmiron.webp',
+            },
+            username: 'ramsesmiron',
+          },
+          content: 'Test comment content',
+        },
+      };
+
+      service
+        .addComment(commentPayload.replyingTo, commentPayload.commentData)
+        .subscribe((comment: CommentI) => {
+          expect(comment.id);
+        });
+
+      service.getComment(5).subscribe((comment: CommentI) => {
+        expect(comment.id).toEqual(5);
+        expect(comment.content).toEqual(commentPayload.commentData.content);
+      });
+    });
+
+    it('Should save comment in localStorage', () => {
+      localStorage.clear();
+
+      const commentPayload: { replyingTo: number; commentData: any } = {
+        replyingTo: 1,
+        commentData: {
+          replyingTo: 'TestUser',
+          user: {
+            image: {
+              png: './assets/images/avatars/image-ramsesmiron.png',
+              webp: './assets/images/avatars/image-ramsesmiron.webp',
+            },
+            username: 'ramsesmiron',
+          },
+          content: 'Test comment content',
+        },
+      };
+
+      service
+        .addComment(commentPayload.replyingTo, commentPayload.commentData)
+        .subscribe((comment: CommentI) => {
+          expect(comment.id);
+        });
+
+      const localData = localStorage.getItem('comments');
+
+      service.getComments.subscribe((comments: CommentI[]) => {
+        expect(localData).toEqual(JSON.stringify(comments));
+      });
+    });
+  });
+
+  describe('Test deleteComment()', () => {
+    it('Should delete comment and update cache', () => {
+      service.deleteComment(2);
+
+      service
+        .getComment(3)
+        .subscribe((comment: CommentI) => expect(comment.id).toBeFalsy());
+    });
+
+    it('Should delete reply comment and update cache', () => {
+      service.deleteComment(3);
+
+      service
+        .getComment(3)
+        .subscribe((comment: CommentI) => expect(comment.id).toBeFalsy());
+    });
+
+    it('Should delete comment and update localStorage', () => {
+      localStorage.clear();
+
+      service.deleteComment(3);
+
+      const localData = localStorage.getItem('comments');
+
+      service.getComments.subscribe((comments: CommentI[]) =>
+        expect(localData).toEqual(JSON.stringify(localData))
+      );
+    });
+  });
+
+  describe('Test updateComment()', () => {
+    it('Should update comment content', () => {
+      const commentPayload = {
+        id: 1,
+        content: 'Update comment content',
+      };
+
+      service.updateComment(commentPayload.id, commentPayload.content);
+
+      service
+        .getComment(commentPayload.id)
+        .subscribe((comment: CommentI) =>
+          expect(comment.content).toEqual(commentPayload.content)
+        );
+    });
+    it('Should update comment score', () => {});
+    it('Should update reply comment content', () => {});
+    it('Should update reply comment score', () => {});
+
+    it('Should update comment and update localStorage', () => {});
   });
 });
