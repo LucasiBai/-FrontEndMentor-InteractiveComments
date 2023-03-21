@@ -114,7 +114,7 @@ export class RequestService {
     localStorage.setItem('comments', parsedData);
   }
 
-  private findComment(id: number) {
+  private findComment(id: number, source: boolean = false) {
     const comments = [...this.appComments$.value];
 
     let selectedComment: CommentI = initComment;
@@ -127,28 +127,7 @@ export class RequestService {
 
         for (const reply of replies) {
           if (reply.id === id) {
-            selectedComment = reply;
-          }
-        }
-      }
-    }
-    return selectedComment;
-  }
-
-  private findSourceComment(id: number) {
-    const comments = [...this.appComments$.value];
-
-    let selectedComment: CommentI = initComment;
-
-    for (const comment of comments) {
-      if (comment.id === id) {
-        selectedComment = comment;
-      } else {
-        const replies: CommentI[] = comment.replies || [];
-
-        for (const reply of replies) {
-          if (reply.id === id) {
-            selectedComment = comment;
+            selectedComment = source ? comment : reply;
           }
         }
       }
@@ -167,7 +146,7 @@ export class RequestService {
   addComment(replyingTo: number, commentData: any): Observable<CommentI> {
     const id = this.lastIndex++;
 
-    const replyComment = this.findSourceComment(replyingTo);
+    const replyComment = this.findComment(replyingTo, true);
 
     const newCommentPayload = {
       id,
@@ -191,17 +170,24 @@ export class RequestService {
   }
 
   deleteComment(id: number) {
-    const sourceDeleteComment = this.findSourceComment(id);
+    const sourceDeleteComment = this.findComment(id, true);
 
-    sourceDeleteComment.replies = sourceDeleteComment.replies?.filter(
-      (comment: CommentI) => comment.id !== id
-    );
+    let data: CommentI[];
 
-    const data = [...this.appComments$.value].map((comment) => {
-      if (comment.id !== sourceDeleteComment.id) return comment;
-      return sourceDeleteComment;
-    });
+    if (sourceDeleteComment.id === id) {
+      data = [...this.appComments$.value].filter(
+        (comment) => comment.id !== id
+      );
+    } else {
+      sourceDeleteComment.replies = sourceDeleteComment.replies?.filter(
+        (comment: CommentI) => comment.id !== id
+      );
 
+      data = [...this.appComments$.value].map((comment) => {
+        if (comment.id !== sourceDeleteComment.id) return comment;
+        return sourceDeleteComment;
+      });
+    }
     this.appComments$.next(data);
 
     this.saveData();
@@ -216,7 +202,7 @@ export class RequestService {
     if (comment.content === newContent) return;
     comment.content = newContent;
 
-    const sourceComment = this.findSourceComment(id);
+    const sourceComment = this.findComment(id, true);
     sourceComment.replies = sourceComment.replies?.map(
       (commentItem: CommentI) => {
         if (commentItem.id !== comment.id) return commentItem;

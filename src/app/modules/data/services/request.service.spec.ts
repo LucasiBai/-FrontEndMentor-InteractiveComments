@@ -2,10 +2,11 @@ import { TestBed } from '@angular/core/testing';
 import { CommentI } from '../models/comment-i';
 import { RequestService } from './request.service';
 
-fdescribe('Test Request Service', () => {
+describe('Test Request Service', () => {
   let service: RequestService;
 
   beforeEach(() => {
+    localStorage.removeItem('comments');
     service = TestBed.inject(RequestService);
   });
 
@@ -149,7 +150,7 @@ fdescribe('Test Request Service', () => {
       service.deleteComment(2);
 
       service
-        .getComment(3)
+        .getComment(2)
         .subscribe((comment: CommentI) => expect(comment.id).toBeFalsy());
     });
 
@@ -169,7 +170,7 @@ fdescribe('Test Request Service', () => {
       const localData = localStorage.getItem('comments');
 
       service.getComments.subscribe((comments: CommentI[]) =>
-        expect(localData).toEqual(JSON.stringify(localData))
+        expect(localData).toEqual(JSON.stringify(comments))
       );
     });
   });
@@ -189,10 +190,77 @@ fdescribe('Test Request Service', () => {
           expect(comment.content).toEqual(commentPayload.content)
         );
     });
-    it('Should update comment score', () => {});
-    it('Should update reply comment content', () => {});
-    it('Should update reply comment score', () => {});
+    it('Should update comment score', () => {
+      const commentPayload = {
+        id: 1,
+        content: 'Update comment content',
+        score: 10,
+      };
 
-    it('Should update comment and update localStorage', () => {});
+      service.updateComment(
+        commentPayload.id,
+        commentPayload.content,
+        commentPayload.score
+      );
+
+      service.getComment(commentPayload.id).subscribe((comment: CommentI) => {
+        expect(comment.content).toEqual(commentPayload.content);
+        expect(comment.score).toEqual(commentPayload.score);
+      });
+    });
+    it('Should update reply comment content', () => {
+      const commentPayload = {
+        id: 3,
+        content: 'Update comment content',
+      };
+
+      service.updateComment(commentPayload.id, commentPayload.content);
+
+      service
+        .getComment(commentPayload.id)
+        .subscribe((comment: CommentI) =>
+          expect(comment.content).toEqual(commentPayload.content)
+        );
+    });
+    it('Should update reply comment score', () => {
+      const commentPayload = {
+        id: 2,
+        content: 'Update comment content',
+        score: 10,
+      };
+
+      service.updateComment(
+        commentPayload.id,
+        commentPayload.content,
+        commentPayload.score
+      );
+
+      service.getComment(commentPayload.id).subscribe((comment: CommentI) => {
+        expect(comment.content).toEqual(commentPayload.content);
+        expect(comment.score).toEqual(commentPayload.score);
+      });
+    });
+
+    it('Should update comment and update localStorage', () => {
+      localStorage.clear();
+
+      const commentPayload = {
+        id: 2,
+        content: 'Update comment content',
+        score: 10,
+      };
+
+      service.updateComment(
+        commentPayload.id,
+        commentPayload.content,
+        commentPayload.score
+      );
+
+      const localData: string = localStorage.getItem('comments') || '';
+
+      service.getComments.subscribe((comments: CommentI[]) =>
+        expect(localData).toEqual(JSON.stringify(comments))
+      );
+    });
   });
 });
