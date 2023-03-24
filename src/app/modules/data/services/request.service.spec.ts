@@ -57,6 +57,10 @@ describe('Test Request Service', () => {
   });
 
   describe('Test addComment()', () => {
+    beforeEach(() => {
+      localStorage.clear();
+    });
+
     it('Should reply to comment and create comment in cache', () => {
       const commentPayload: { replyingTo: number; commentData: any } = {
         replyingTo: 1,
@@ -114,8 +118,6 @@ describe('Test Request Service', () => {
     });
 
     it('Should save comment in localStorage', () => {
-      localStorage.clear();
-
       const commentPayload: { replyingTo: number; commentData: any } = {
         replyingTo: 1,
         commentData: {
